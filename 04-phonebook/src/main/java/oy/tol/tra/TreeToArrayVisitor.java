@@ -5,7 +5,7 @@ class TreeToArrayVisitor<K extends Comparable<K>, V> implements Visitor<K, V> {
    private Pair<K, V> [] elements;
    private int count = 0;
 
-   @java.lang.SuppressWarnings({"unchecked"})
+   @SuppressWarnings({"unchecked"})
    public TreeToArrayVisitor(int count) {
       elements = (Pair<K,V>[])new Pair[count];
       count = 0;
