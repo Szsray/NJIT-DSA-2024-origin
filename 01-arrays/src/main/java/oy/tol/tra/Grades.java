@@ -5,7 +5,7 @@ package oy.tol.tra;
  * misbehaving algorithm for reversing the array.
  */
 public class Grades {
-   
+
    private Integer [] grades = null;
 
    /**
@@ -37,7 +37,7 @@ public class Grades {
          grades[i] = grades[grades.length-i-1];
          grades[grades.length-i-1] = temp;
          i++;
-     }
+      }
    }
 
    /**
