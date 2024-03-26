@@ -31,14 +31,9 @@ public class Grades {
        5. Fix the issue.
        6. Transform the algorithm to <strong>use</strong> the generic one from Algorithms.java, as instructed in the readme file.
       */
-      int i = 0;
-      while (i <grades.length/2) {
-         int temp = grades[i];
-         grades[i] = grades[grades.length-i-1];
-         grades[grades.length-i-1] = temp;
-         i++;
+      Algorithms.reverse(this.grades);
       }
-   }
+
 
    /**
     * Sorts the array to ascending order.
@@ -52,16 +47,11 @@ public class Grades {
        5. Fix the issue.
        6. Transform the algorithm to <strong>use</strong> the generic one from Algorithms.java as instructed in the readme file.
       */
-      for (int i=0;i< grades.length;i++){
-         for (int a=0;a< grades.length-i-1;a++){
-            if (grades[a+1]<grades[a]){
-               int temp=grades[a];
-               grades[a]=grades[a+1];
-               grades[a+1]=temp;
+      Algorithms.sort(this.grades);
             }
 
-         }
-      }}
+
+
    /**
     * Returns the plain Java int [] array for investigation.
     * @return The int array.
