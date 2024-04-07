@@ -3,8 +3,6 @@ package oy.tol.tra;
 import java.util.Comparator;
 
 public class Algorithms {
-
-    // Implementation of the quicksort algorithm
     public static <T extends Comparable<T>> void fastSort(T[] array) {
         if (array == null || array.length == 0) {
             return;
@@ -39,31 +37,31 @@ public class Algorithms {
         array[j] = temp;
     }
 
-    // Implementation of partitionByRule method
+
     public static <T> int partitionByRule(T[] array, int length, PartitionRule<T> rule) {
         int left = 0;
         int right = length - 1;
         while (left <= right) {
-            // Find the first element that does not satisfy the rule from the left side
+
             while (left <= right && rule.test(array[left])) {
                 left++;
             }
-            // Find the first element that satisfies the rule from the right side
+
             while (left <= right && !rule.test(array[right])) {
                 right--;
             }
-            // Swap the elements if they are in the wrong order
+
             if (left <= right) {
                 swap(array, left, right);
                 left++;
                 right--;
             }
         }
-        // Return the index where the partition occurs
+
         return left;
     }
 
-    // Implementation of sortWithComparator method
+
     public static <T> void sortWithComparator(T[] array, Comparator<T> comparator) {
         fastSortWithComparator(array, comparator, 0, array.length - 1);
     }
@@ -89,7 +87,6 @@ public class Algorithms {
         return i + 1;
     }
 
-    // Functional interface for defining partition rule
     public interface PartitionRule<T> {
         boolean test(T element);
     }

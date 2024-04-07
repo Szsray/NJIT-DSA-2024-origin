@@ -2,8 +2,6 @@ package oy.tol.tra;
 
 public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary<K, V> {
 
-    // This should implement a hash table.
-
     private Pair<K, V>[] values = null;
     private int count = 0;
     private int collisionCount = 0;
@@ -31,7 +29,6 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
         if (capacity < DEFAULT_CAPACITY) {
             capacity = DEFAULT_CAPACITY;
         }
-        // Assuming capacity means the count of elements to add, so multiplying by fill factor.
         values = (Pair<K, V>[]) new Pair[(int) ((double) capacity * (1.0 + LOAD_FACTOR))];
         reallocationCount = 0;
         count = 0;
@@ -41,21 +38,10 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
 
     @Override
     public int size() {
-        // TODO: Implement this.
         return count;
     }
 
-    /**
-     * Prints out the statistics of the hash table.
-     * Here you should print out member variable information which tell something
-     * about your implementation.
-     * <p>
-     * For example, if you implement this using a hash table, update member
-     * variables of the class (int counters) in add() whenever a collision
-     * happen. Then print this counter value here.
-     * You will then see if you have too many collisions. It will tell you that your
-     * hash function is not good.
-     */
+
     @Override
     public String getStatus() {
         StringBuilder builder = new StringBuilder();
@@ -67,35 +53,24 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
         builder.append(String.format("Hash table had to reallocate %d times.%n", reallocationCount));
         return builder.toString();
     }
-
     @Override
     public boolean add(K key, V value) throws IllegalArgumentException, OutOfMemoryError {
-        // TODO: Implement this.
-        // Remeber to check for null values.
+
         if (key == null) {
             throw new IllegalArgumentException("Key cannot be null");
         }
-        // Checks if the LOAD_FACTOR has been exceeded --> if so, reallocates to a bigger hashtable.
         if (((double)count * (1.0 + LOAD_FACTOR)) >= values.length) {
             reallocate((int)((double)(values.length) * (1.0 / LOAD_FACTOR)));
         }
-        // Remember to get the hash key from the Person,
-        // hash table computes the index for the Person (based on the hash value),
-        // if index was taken by different Person (collision), get new hash and index,
-        // insert into table when the index has a null in it,
-        // return true if existing Person updated or new Person inserted.
-
         int hash = key.hashCode();
         int index = hash % values.length;
         int probingSteps = 0;
 
         while (values[index] != null && probingSteps < values.length) {
             if (values[index].getKey().equals(key)) {
-                // Key already exists, update the value
                 values[index] = new Pair<>(key, value);
                 return true;
             }
-            // Collision occurred, use linear probing
             index = (index + 1) % values.length;
             probingSteps++;
             collisionCount++;
@@ -114,9 +89,6 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
 
     @Override
     public V find(K key) throws IllegalArgumentException {
-        // Remember to check for null.
-
-        // Must use same method for computing index as add method
         if (key == null) {
             throw new IllegalArgumentException("Key cannot be null");
         }
